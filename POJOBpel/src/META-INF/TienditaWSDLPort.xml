@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="TienditaWSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL">
+  <types>
+  </types>
+  <message name="TienditaWSDLOperationResponse">
+    <part name="resultado" type="xsd:string">
+    </part>
+  </message>
+  <message name="TienditaWSDLOperationRequest">
+    <part name="ISBN" type="xsd:string">
+    </part>
+    <part name="unidades" type="xsd:int">
+    </part>
+    <part name="idCliente" type="xsd:int">
+    </part>
+  </message>
+  <portType name="TienditaWSDLPortType">
+    <operation name="TienditaWSDLOperation">
+      <input message="tns:TienditaWSDLOperationRequest" name="input1">
+    </input>
+      <output message="tns:TienditaWSDLOperationResponse" name="output1">
+    </output>
+    </operation>
+  </portType>
+  <binding name="TienditaWSDLBinding" type="tns:TienditaWSDLPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="TienditaWSDLOperation">
+      <soap:operation/>
+      <input name="input1">
+        <soap:body namespace="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" use="literal"/>
+      </input>
+      <output name="output1">
+        <soap:body namespace="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="TienditaWSDLService">
+    <port binding="tns:TienditaWSDLBinding" name="TienditaWSDLPort">
+      <soap:address location="http://Ivana:9080/TienditaWSDLService/TienditaWSDLPort"/>
+    </port>
+  </service>
+    <plnk:partnerLinkType name="TienditaWSDL">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="TienditaWSDLPortTypeRole" portType="tns:TienditaWSDLPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

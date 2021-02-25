@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://wsMensajeria/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wsMensajeria/">
+
+<xs:element name="category" type="tns:category"/>
+
+<xs:element name="customer" type="tns:customer"/>
+
+<xs:element name="customerOrder" type="tns:customerOrder"/>
+
+<xs:element name="edit" type="tns:edit"/>
+
+<xs:element name="enviarProducto" type="tns:enviarProducto"/>
+
+<xs:element name="enviarProductoResponse" type="tns:enviarProductoResponse"/>
+
+<xs:element name="find" type="tns:find"/>
+
+<xs:element name="findAll" type="tns:findAll"/>
+
+<xs:element name="findAllResponse" type="tns:findAllResponse"/>
+
+<xs:element name="findResponse" type="tns:findResponse"/>
+
+<xs:element name="hacerEntrega" type="tns:hacerEntrega"/>
+
+<xs:element name="hacerEntregaResponse" type="tns:hacerEntregaResponse"/>
+
+<xs:element name="product" type="tns:product"/>
+
+<xs:complexType name="edit">
+<xs:sequence>
+<xs:element name="entity" type="tns:customerOrder" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="customerOrder">
+<xs:sequence>
+<xs:element name="amount" type="xs:decimal" minOccurs="0"/>
+<xs:element name="customerId" type="tns:customer" minOccurs="0"/>
+<xs:element name="dateCreated" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="deliveryDate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="deliverySystem" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="productId" type="tns:product" minOccurs="0"/>
+<xs:element name="quantity" type="xs:short"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="customer">
+<xs:sequence>
+<xs:element name="address" type="xs:string" minOccurs="0"/>
+<xs:element name="ccNumber" type="xs:string" minOccurs="0"/>
+<xs:element name="cityRegion" type="xs:string" minOccurs="0"/>
+<xs:element name="credit" type="xs:decimal" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="phone" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="product">
+<xs:sequence>
+<xs:element name="author" type="xs:string" minOccurs="0"/>
+<xs:element name="categoryId" type="tns:category" minOccurs="0"/>
+<xs:element name="description" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:long" minOccurs="0"/>
+<xs:element name="lastUpdate" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="price" type="xs:decimal" minOccurs="0"/>
+<xs:element name="reserved" type="xs:int"/>
+<xs:element name="stock" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="category">
+<xs:sequence>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="find">
+<xs:sequence>
+<xs:element name="id" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:customerOrder" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="enviarProducto">
+<xs:sequence>
+<xs:element name="idPedido" type="xs:int"/>
+<xs:element name="empresaEnvio" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="enviarProductoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAll">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:customerOrder" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hacerEntrega">
+<xs:sequence>
+<xs:element name="idPedido" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hacerEntregaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

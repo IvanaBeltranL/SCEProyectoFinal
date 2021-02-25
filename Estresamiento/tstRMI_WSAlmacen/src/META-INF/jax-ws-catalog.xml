@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://192.168.0.10:8080/proyT01_159702_AACM/miWSSuma?WSDL" uri="wsdl/192.168.0.10_8080/proyT01_159702_AACM/miWSSuma.wsdl"/>
+    <system systemId="http://192.168.0.10:8080/proyT01_159702_AACM/miWSSuma?xsd=1" uri="wsdl/192.168.0.10_8080/proyT01_159702_AACM/miWSSuma.xsd_1.xsd"/>
+    <system systemId="http://192.168.0.12:8080/EscBaileWeb/NewWebService?WSDL" uri="wsdl/192.168.0.12_8080/EscBaileWeb/NewWebService.wsdl"/>
+    <system systemId="http://192.168.0.12:8080/EscBaileWeb/NewWebService?xsd=1" uri="wsdl/192.168.0.12_8080/EscBaileWeb/NewWebService.xsd_1.xsd"/>
+    <system systemId="http://192.168.0.12:8080/EscBaileWeb/bajas?WSDL" uri="wsdl/192.168.0.12_8080/EscBaileWeb/bajas.wsdl"/>
+    <system systemId="http://192.168.0.12:8080/EscBaileWeb/bajas?xsd=1" uri="wsdl/192.168.0.12_8080/EscBaileWeb/bajas.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronicaV2/Almacen?WSDL" uri="wsdl/localhost_8080/TiendaElectronicaV2/Almacen.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronicaV2/Almacen?xsd=1" uri="wsdl/localhost_8080/TiendaElectronicaV2/Almacen.xsd_1.xsd"/>
+</catalog>

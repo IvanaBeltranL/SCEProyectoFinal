@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/PagoOnlineV2/PasarelaPago?WSDL" uri="xml-resources/web-service-references/PasarelaPago/wsdl/localhost_8080/PagoOnlineV2/PasarelaPago.wsdl"/>
+    <system systemId="http://localhost:8080/PagoOnlineV2/PasarelaPago?xsd=1" uri="xml-resources/web-service-references/PasarelaPago/wsdl/localhost_8080/PagoOnlineV2/PasarelaPago.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronicaV2/Almacen?WSDL" uri="xml-resources/web-service-references/Almacen/wsdl/localhost_8080/TiendaElectronicaV2/Almacen.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronicaV2/Almacen?xsd=1" uri="xml-resources/web-service-references/Almacen/wsdl/localhost_8080/TiendaElectronicaV2/Almacen.xsd_1.xsd"/>
+</catalog>

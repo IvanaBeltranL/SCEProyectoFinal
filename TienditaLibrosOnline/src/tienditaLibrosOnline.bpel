@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="tienditaLibrosOnline"
+    targetNamespace="http://enterprise.netbeans.org/bpel/TienditaLibrosOnline/tienditaLibrosOnline"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/TienditaLibrosOnline/tienditaLibrosOnline"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
+   <import namespace="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" location="DescriptorBPEL/TienditaWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://enterprise.netbeans.org/bpel/AlmacenWrapper" location="AlmacenWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://wsAlmacen/" location="http://localhost:32093/TiendaElectronicaV2/Almacen?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://enterprise.netbeans.org/bpel/EnvioPaquetesWrapper" location="EnvioPaquetesWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://wsMensajeria/" location="http://localhost:32093/MensajeriaExpressV2/EnvioPaquetes?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://enterprise.netbeans.org/bpel/PasarelaPagoWrapper" location="PasarelaPagoWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <import namespace="http://wspasarelapago/" location="http://localhost:32093/PagoOnlineV2/PasarelaPago?WSDL" importType="http://schemas.xmlsoap.org/wsdl/"/>
+   <partnerLinks>
+      <partnerLink name="ServicioAlmacen" xmlns:tns="http://enterprise.netbeans.org/bpel/AlmacenWrapper" partnerLinkType="tns:AlmacenLinkType" partnerRole="AlmacenRole"/>
+      <partnerLink name="ServicioEntrega" xmlns:tns="http://enterprise.netbeans.org/bpel/EnvioPaquetesWrapper" partnerLinkType="tns:EnvioPaquetesLinkType" partnerRole="EnvioPaquetesRole"/>
+      <partnerLink name="ServicioPago" xmlns:tns="http://enterprise.netbeans.org/bpel/PasarelaPagoWrapper" partnerLinkType="tns:PasarelaPagoLinkType" partnerRole="PasarelaPagoRole"/>
+      <partnerLink name="TienditaWSDL" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" partnerLinkType="tns:TienditaWSDL" myRole="TienditaWSDLPortTypeRole"/>
+   </partnerLinks>
+   <variables>
+      <variable name="TienditaWSDLOperationOutNoExisteCliente" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationResponse"/>
+      <variable name="EnviarProductoOut" xmlns:tns="http://wsMensajeria/" messageType="tns:enviarProductoResponse"/>
+      <variable name="EnviarProductoIn" xmlns:tns="http://wsMensajeria/" messageType="tns:enviarProducto"/>
+      <variable name="FacturarOut" xmlns:tns="http://wspasarelapago/" messageType="tns:FacturarResponse"/>
+      <variable name="FacturarIn" xmlns:tns="http://wspasarelapago/" messageType="tns:Facturar"/>
+      <variable name="ComprobarStockOut" xmlns:tns="http://wsAlmacen/" messageType="tns:comprobarStockResponse"/>
+      <variable name="ComprobarStockIn" xmlns:tns="http://wsAlmacen/" messageType="tns:comprobarStock"/>
+      <variable name="TienditaWSDLOperationOutDiasEntrega" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationResponse"/>
+      <variable name="TienditaWSDLOperationOutNoCredito" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationResponse"/>
+      <variable name="TienditaWSDLOperationOutNoExiste" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationResponse"/>
+      <variable name="TienditaWSDLOperationOutNoStock" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationResponse"/>
+      <variable name="TienditaWSDLOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" messageType="tns:TienditaWSDLOperationRequest"/>
+   </variables>
+   <sequence>
+      <receive name="Recepcion" createInstance="yes" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationIn"/>
+      <if name="If1">
+         <condition>true() and $TienditaWSDLOperationIn.idCliente &lt; 7 and $TienditaWSDLOperationIn.idCliente &gt; 0</condition>
+         <sequence name="Sequence6">
+            <assign name="AssignStock">
+               <copy>
+                  <from variable="TienditaWSDLOperationIn" part="ISBN"/>
+                     <to>$ComprobarStockIn.parameters/ISBN</to>
+               </copy>
+                  <copy>
+                  <from variable="TienditaWSDLOperationIn" part="unidades"/>
+                     <to>$ComprobarStockIn.parameters/unidades</to>
+               </copy>
+            </assign>
+            <invoke name="ComprobarStock" partnerLink="ServicioAlmacen" operation="comprobarStock" xmlns:tns="http://wsAlmacen/" portType="tns:Almacen" inputVariable="ComprobarStockIn" outputVariable="ComprobarStockOut"/>
+            <if name="If-Stock" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL">
+               <condition>true() and $ComprobarStockOut.parameters/return = $TienditaWSDLOperationIn.unidades</condition>
+                  <sequence name="Sequence1">
+                     <assign name="AssignPago">
+                           <copy>
+                                 <from variable="TienditaWSDLOperationIn" part="ISBN"/>
+                                    <to>$FacturarIn.parameters/idProducto</to>
+                              </copy>
+                              <copy>
+                                 <from variable="TienditaWSDLOperationIn" part="unidades"/>
+                                    <to>$FacturarIn.parameters/cantidad</to>
+                              </copy>
+                              <copy>
+                                 <from variable="TienditaWSDLOperationIn" part="idCliente"/>
+                                    <to>$FacturarIn.parameters/idCliente</to>
+                              </copy>
+                        </assign>
+                        <invoke name="ComprobarPago" partnerLink="ServicioPago" operation="Facturar" xmlns:tns="http://wspasarelapago/" portType="tns:PasarelaPago" inputVariable="FacturarIn" outputVariable="FacturarOut"/>
+                        <if name="If-Pago">
+                           <condition>true() and $FacturarOut.parameters/return &gt; 0</condition>
+                              <sequence name="Sequence2">
+                                 <assign name="AssignEntrega">
+                                       <copy>
+                                             <from>$FacturarOut.parameters/return</from>
+                                                <to>$EnviarProductoIn.parameters/idPedido</to>
+                                          </copy>
+                                          <copy>
+                                             <from>'Los martillazos'</from>
+                                                <to>$EnviarProductoIn.parameters/empresaEnvio</to>
+                                          </copy>
+                                    </assign>
+                                    <invoke name="CalcularDiasEntrega" partnerLink="ServicioEntrega" operation="enviarProducto" xmlns:tns="http://wsMensajeria/" portType="tns:EnvioPaquetes" inputVariable="EnviarProductoIn" outputVariable="EnviarProductoOut"/>
+                                    <assign name="AssignResDias">
+                                       <copy>
+                                             <from>concat('El paquete con No. de orden ', $FacturarOut.parameters/return, ' llegara en ', $EnviarProductoOut.parameters/return, ' dias')</from>
+                                                <to variable="TienditaWSDLOperationOutDiasEntrega" part="resultado"/>
+                                          </copy>
+                                    </assign>
+                                    <reply name="ResDiasEntrega" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationOutDiasEntrega"/>
+                              </sequence>
+                              <else>
+                                 <sequence name="Sequence5">
+                                       <assign name="AssignNoCredito">
+                                             <copy>
+                                                   <from>concat('El cliente con id: ', $TienditaWSDLOperationIn.idCliente, ' no tiene suficiente credito para la compra')</from>
+                                                      <to variable="TienditaWSDLOperationOutNoCredito" part="resultado"/>
+                                                </copy>
+                                          </assign>
+                                          <reply name="ResNoCredito" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationOutNoCredito"/>
+                                    </sequence>
+                              </else>
+                        </if>
+                  </sequence>
+                  <else>
+                     <if name="If-NoStock-Else-NoExiste">
+                           <condition>true() and $ComprobarStockOut.parameters/return = 0</condition>
+                              <sequence name="Sequence3">
+                                 <assign name="AssignNoSufStock">
+                                       <copy>
+                                             <from>concat('No hay suficiente stock del libro con el ISBN: ', $TienditaWSDLOperationIn.ISBN)</from>
+                                                <to variable="TienditaWSDLOperationOutNoStock" part="resultado"/>
+                                          </copy>
+                                    </assign>
+                                    <reply name="ResNoStock" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationOutNoStock"/>
+                              </sequence>
+                              <else>
+                                 <sequence name="Sequence4">
+                                       <assign name="AssignNoExiste">
+                                             <copy>
+                                                   <from>concat('No tenemos el libro con el ISBN: ', $TienditaWSDLOperationIn.ISBN)</from>
+                                                      <to variable="TienditaWSDLOperationOutNoExiste" part="resultado"/>
+                                                </copy>
+                                          </assign>
+                                          <reply name="ResNoExiste" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationOutNoExiste"/>
+                                    </sequence>
+                              </else>
+                        </if>
+                  </else>
+            </if>
+         </sequence>
+         <else>
+            <sequence name="Sequence7">
+               <assign name="Assign1">
+                  <copy>
+                     <from>concat('El cliente con id : ', $TienditaWSDLOperationIn.idCliente, ' no está registrado')</from>
+                     <to variable="TienditaWSDLOperationOutNoExisteCliente" part="resultado"/>
+                  </copy>
+               </assign>
+               <reply name="ResNoExisteCliente" partnerLink="TienditaWSDL" operation="TienditaWSDLOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" portType="tns:TienditaWSDLPortType" variable="TienditaWSDLOperationOutNoExisteCliente"/>
+            </sequence>
+         </else>
+      </if>
+   </sequence>
+</process>

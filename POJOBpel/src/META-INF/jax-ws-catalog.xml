@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/iva_0/Documents/SCE_Tiendita/POJOBpel/src/TienditaWSDL/TienditaWSDL.wsdl" uri="xml-resources/web-service-references/TienditaWSDL/wsdl/TienditaWSDL.wsdl"/>
+    <system systemId="http://localhost:9080/TienditaWSDLService/TienditaWSDLPort?WSDL" uri="wsdl/localhost_9080/TienditaWSDLService/TienditaWSDLPort.wsdl"/>
+</catalog>

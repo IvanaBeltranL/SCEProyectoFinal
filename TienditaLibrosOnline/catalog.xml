@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <nextCatalog catalog="nbproject/private/retriever/catalog.xml"/>
+    <system systemId="http://localhost:32093/PagoOnlineV2/PasarelaPago?WSDL" uri="src/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.wsdl"/>
+    <system systemId="http://localhost:32093/PagoOnlineV2/PasarelaPago?xsd=1" uri="src/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.xsd_1.xsd"/>
+    <system systemId="http://localhost:32093/TiendaElectronicaV2/Almacen?WSDL" uri="src/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.wsdl"/>
+    <system systemId="http://localhost:32093/TiendaElectronicaV2/Almacen?xsd=1" uri="src/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.xsd_1.xsd"/>
+    <system systemId="http://localhost:32093/MensajeriaExpressV2/EnvioPaquetes?WSDL" uri="src/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.wsdl"/>
+    <system systemId="http://localhost:32093/MensajeriaExpressV2/EnvioPaquetes?xsd=1" uri="src/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.xsd_1.xsd"/>
+</catalog>

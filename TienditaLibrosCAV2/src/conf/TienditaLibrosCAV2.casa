@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://wsMensajeria/" xmlns:ns2="http://wspasarelapago/" xmlns:ns3="http://wsAlmacen/" xmlns:ns4="http://j2ee.netbeans.org/wsdl/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL" xmlns:ns5="http://enterprise.netbeans.org/bpel/TienditaLibrosOnline/tienditaLibrosOnline" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="EnvioPaquetesPort" interface-name="ns1:EnvioPaquetes" name="endpoint1" service-name="ns1:EnvioPaquetes"/>
+        <endpoint endpoint-name="PasarelaPagoPort" interface-name="ns2:PasarelaPago" name="endpoint2" service-name="ns2:PasarelaPago"/>
+        <endpoint endpoint-name="AlmacenPort" interface-name="ns3:Almacen" name="endpoint3" service-name="ns3:Almacen"/>
+        <endpoint endpoint-name="TienditaWSDLPort" interface-name="ns4:TienditaWSDLPortType" name="endpoint4" service-name="ns4:TienditaWSDLService"/>
+        <endpoint display-name="TienditaWSDL" endpoint-name="TienditaWSDLPortTypeRole_myRole" file-path="tienditaLibrosOnline.bpel" interface-name="ns4:TienditaWSDLPortType" name="endpoint5" process-name="tienditaLibrosOnline" service-name="ns5:TienditaWSDL"/>
+        <endpoint display-name="ServicioAlmacen" endpoint-name="AlmacenRole_partnerRole" file-path="tienditaLibrosOnline.bpel" interface-name="ns3:Almacen" name="endpoint6" process-name="tienditaLibrosOnline" service-name="ns5:ServicioAlmacen"/>
+        <endpoint display-name="ServicioEntrega" endpoint-name="EnvioPaquetesRole_partnerRole" file-path="tienditaLibrosOnline.bpel" interface-name="ns1:EnvioPaquetes" name="endpoint7" process-name="tienditaLibrosOnline" service-name="ns5:ServicioEntrega"/>
+        <endpoint display-name="ServicioPago" endpoint-name="PasarelaPagoRole_partnerRole" file-path="tienditaLibrosOnline.bpel" interface-name="ns2:PasarelaPago" name="endpoint8" process-name="tienditaLibrosOnline" service-name="ns5:ServicioPago"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="TienditaLibrosOnline.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="TienditaLibrosCAV2-TienditaLibrosOnline" unit-name="TienditaLibrosOnline" unknown="false" x="133" y="99">
+            <provides endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
+            <consumes endpoint="endpoint7"/>
+            <consumes endpoint="endpoint8"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="TienditaLibrosCAV2-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port x="67" y="276">
+                    <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL.wsdl#xpointer(/definitions/service[@name='TienditaWSDLService']/port[@name='TienditaWSDLPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint4"/>
+                    <provides endpoint="endpoint4"/>
+                </port>
+                <port x="67" y="197">
+                    <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.wsdl#xpointer(/definitions/service[@name='Almacen']/port[@name='AlmacenPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+                <port x="67" y="118">
+                    <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.wsdl#xpointer(/definitions/service[@name='EnvioPaquetes']/port[@name='EnvioPaquetesPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+                <port x="67" y="39">
+                    <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.wsdl#xpointer(/definitions/service[@name='PasarelaPago']/port[@name='PasarelaPagoPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint2"/>
+                    <provides endpoint="endpoint2"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint7" mode="" provider="endpoint1" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint4" mode="" provider="endpoint5" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint8" mode="" provider="endpoint2" route-type="" routing-rule="" state="unchanged"/>
+        <connection consumer="endpoint6" mode="" provider="endpoint3" route-type="" routing-rule="" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL.wsdl#xpointer(/definitions/portType[@name='TienditaWSDLPortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.wsdl#xpointer(/definitions/portType[@name='Almacen'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.wsdl#xpointer(/definitions/portType[@name='EnvioPaquetes'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.wsdl#xpointer(/definitions/portType[@name='PasarelaPago'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL.wsdl#xpointer(/definitions/binding[@name='TienditaWSDLBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.wsdl#xpointer(/definitions/binding[@name='AlmacenPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.wsdl#xpointer(/definitions/binding[@name='EnvioPaquetesPortBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.wsdl#xpointer(/definitions/binding[@name='PasarelaPagoPortBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/DescriptorBPEL/TienditaWSDL.wsdl#xpointer(/definitions/service[@name='TienditaWSDLService'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioAlmacen/localhost_32093/TiendaElectronicaV2/Almacen.wsdl#xpointer(/definitions/service[@name='Almacen'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioEntrega/localhost_32093/MensajeriaExpressV2/EnvioPaquetes.wsdl#xpointer(/definitions/service[@name='EnvioPaquetes'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/TienditaLibrosOnline/ServicioPago/localhost_32093/PagoOnlineV2/PasarelaPago.wsdl#xpointer(/definitions/service[@name='PasarelaPago'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>
